@@ -1,0 +1,8 @@
+sf-class2-root:
+  crt:
+production:
+  keyspaces:
+    user: 'cassandra-at-475560691356'
+    password: 'LQWzOXzWxbqDMHsojMTjVpNR6lqFwCOMzMNbDjFcVIg='
+    port: 9142
+    cluster: 'cassandra.ap-south-1.amazonaws.com'

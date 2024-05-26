@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Sender</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            background-color: #f1935c;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .loading {
+            display: none;
+            font-size: 16px;
+            margin-left: 10px;
+        }
+        .status {
+            font-size: 16px;
+            margin-left: 10px;
+        }
+        .success {
+            color: green;
+        }
+        .failure {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>GNA Email Sender</h1>
+        <button id="send-market-snapshot-btn">Send Market Snapshot</button>
+        <span id="market-snapshot-loading" class="loading">Loading...</span>
+        <span id="market-snapshot-status" class="status"></span>
+        <br><br>
+        <button id="send-psp-btn">Send PSP Data</button>
+        <span id="psp-loading" class="loading">Loading...</span>
+        <span id="psp-status" class="status"></span>
+        <br><br>
+        <button id="send-crossborder-btn">Send Cross-Border Data</button>
+        <span id="crossborder-loading" class="loading">Loading...</span>
+        <span id="crossborder-status" class="status"></span>
+    </div>
+
+    <script>
+        document.getElementById('send-market-snapshot-btn').addEventListener('click', async () => {
+            document.getElementById('market-snapshot-loading').style.display = 'inline';
+            document.getElementById('market-snapshot-status').innerText = '';
+
+            const response = await fetch('/send_marketsnapshot', {
+                method: 'POST'
+            });
+
+            const data = await response.json();
+            document.getElementById('market-snapshot-loading').style.display = 'none';
+            if (data.success) {
+                document.getElementById('market-snapshot-status').innerText = '✔️ Success';
+                document.getElementById('market-snapshot-status').classList.add('success');
+            } else {
+                document.getElementById('market-snapshot-status').innerText = '❌ Data Not Available. Please try again later.';
+                document.getElementById('market-snapshot-status').classList.add('failure');
+            }
+        });
+
+        document.getElementById('send-psp-btn').addEventListener('click', async () => {
+            document.getElementById('psp-loading').style.display = 'inline';
+            document.getElementById('psp-status').innerText = '';
+
+            const response = await fetch('/send_psp', {
+                method: 'POST'
+            });
+
+            const data = await response.json();
+            document.getElementById('psp-loading').style.display = 'none';
+            if (data.success) {
+                document.getElementById('psp-status').innerText = '✔️ Success';
+                document.getElementById('psp-status').classList.add('success');
+            } else {
+                document.getElementById('psp-status').innerText = '❌ Data Not Available. Please try again later.';
+                document.getElementById('psp-status').classList.add('failure');
+            }
+        });
+
+        document.getElementById('send-crossborder-btn').addEventListener('click', async () => {
+            document.getElementById('crossborder-loading').style.display = 'inline';
+            document.getElementById('crossborder-status').innerText = '';
+
+            const response = await fetch('/send_crossborder', {
+                method: 'POST'
+            });
+
+            const data = await response.json();
+            document.getElementById('crossborder-loading').style.display = 'none';
+            if (data.success) {
+                document.getElementById('crossborder-status').innerText = '✔️ Success';
+                document.getElementById('crossborder-status').classList.add('success');
+            } else {
+                document.getElementById('crossborder-status').innerText = '❌ Data Not Available. Please try again later.' ;
+                document.getElementById('crossborder-status').classList.add('failure');
+            }
+        });
+    </script>
+</body>
+</html>
