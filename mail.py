@@ -12,12 +12,9 @@ def sendMail(filePath, Subject):
     msg['From'] = sender_email
     msg['To'] = ", ".join(receiver_emails)
     msg['Subject'] = Subject
-
     msg.attach(MIMEText(Subject, 'plain'))
-
     filename = filePath
     attachment = open(filename, 'rb')
-
     part = MIMEBase('application', 'octet-stream')
     part.set_payload((attachment).read())
     encoders.encode_base64(part)
