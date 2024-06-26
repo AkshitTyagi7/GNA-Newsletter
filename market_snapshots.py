@@ -103,7 +103,7 @@ def sendMarketSnapshotMail():
         df4.to_excel(writer, sheet_name='HPX Year Comparison', index=False)
         df5.to_excel(writer, sheet_name='PXIL Year Comparison', index=False)
 
-    # sendMail('Market_Snapshot.xlsx', f'Market Snapshot data for Newsletter {datetime.now().strftime("%d-%m-%20%y")}')
+    sendMail('Market_Snapshot.xlsx', f'Market Snapshot data for Newsletter {datetime.now().strftime("%d-%m-%20%y")}')
 
 if __name__ == '__main__':
     sendMarketSnapshotMail()
