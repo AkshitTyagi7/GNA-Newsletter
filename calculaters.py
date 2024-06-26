@@ -2,7 +2,6 @@ from decimal import Decimal
 
 
 def calculate_cumulative_metrics_iex_dam(rows):
-    # Initialize cumulative variables
     purchase_bid_total = Decimal('0')
     sell_bid_total = Decimal('0')
     mcv_total = Decimal('0')
@@ -26,7 +25,7 @@ def calculate_cumulative_metrics_iex_dam(rows):
     for row in rows:
         prchs_bid_mw = Decimal(row.prchs_bid_mw) if row.prchs_bid_mw else Decimal('0')
         sell_bid_mw = Decimal(row.sell_bid_mw) if row.sell_bid_mw else Decimal('0')
-        mcv_mw = Decimal(row.mcv_mw) if row.mcv_mw else Decimal('0')
+        mcv_mw = Decimal(row.mcv_mw) 
         mcp_rs_mwh = Decimal(row.mcp_rs_mwh) if row.mcp_rs_mwh else Decimal('0')
         wt_mcp_rs_mwh = Decimal(row.wt_mcp_rs_mwh) if row.wt_mcp_rs_mwh else Decimal('0')
 
@@ -34,7 +33,7 @@ def calculate_cumulative_metrics_iex_dam(rows):
         sell_bid_total += sell_bid_mw
         mcv_total += mcv_mw
         mcp_sum += mcp_rs_mwh
-        weighted_mcp_sum += (wt_mcp_rs_mwh * mcv_mw)/1000  # Calculate weighted sum of MCP
+        weighted_mcp_sum += (wt_mcp_rs_mwh * mcv_mw)  # Calculate weighted sum of MCP
 
         if prchs_bid_mw > max_pur_bid:
             max_pur_bid = prchs_bid_mw

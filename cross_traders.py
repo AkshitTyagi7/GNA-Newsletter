@@ -7,9 +7,7 @@ import pandas as pd
 
 def sendCrossBorderMail():
     queries = generate_queries()
-
     cross_border = DataExtraction.execute_query(queries['cross_border_query'])
-    
     cross_border_data = calculate_cross_border(cross_border)
 
     df = pd.DataFrame(cross_border_data)
